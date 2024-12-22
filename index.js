@@ -92,6 +92,12 @@ async function run() {
       res.send(result)
     })
 
+    app.delete("/myOrders/:id", async(req,res)=>{
+      const id = req.params.id
+      const objectId = new ObjectId(id)
+      const result = await foodPurchaseCollections.deleteOne({_id: objectId})
+      res.send(result)
+    })
     
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
