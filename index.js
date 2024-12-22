@@ -53,6 +53,29 @@ async function run() {
       res.send(result)
     })
 
+    // update data
+    app.put(`/food/:id`, async(req, res)=>{
+      const id = req.params.id;
+      const filter = {_id: new ObjectId(id)};
+      const options = {upsert: true};
+      const updateFood= req.body;
+      const food = {
+        $set: {
+          foodName:updateFood.foodName,
+            foodImage: updateFood.foodImage,
+            foodCategory: updateFood.foodCategory,
+            quantity: updateFood.quantity,
+            price: updateFood.price,
+            foodOrigin: updateFood.foodOrigin,
+            description: updateFood.description,
+            email: updateFood.email,
+            nam: updateFood.name
+        }
+      }
+
+      const result = await foodCollections.updateOne(filter, food, options)
+      res.send(result)
+    })
 
     
     // Connect the client to the server	(optional starting in v4.7)
