@@ -30,12 +30,17 @@ async function run() {
       res.send(result)
     })
 
-    // get single food data
+    // get single food data id
     app.get("/food/:id", async(req, res)=>{
       const id = req.params.id
       const objectId = new ObjectId(id)
       const result = await foodCollections.findOne({_id: objectId})
-      console.log("hi", result, id)
+      res.send(result)
+    })
+    // get single food data email
+    app.get("/foods/:email", async(req, res)=>{
+      const email = req.params.email
+      const result = await foodCollections.find({"addedBy.email": email}).toArray()
       res.send(result)
     })
 
