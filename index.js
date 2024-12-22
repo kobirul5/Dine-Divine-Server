@@ -42,7 +42,14 @@ async function run() {
     // get single food data email
     app.get("/foods/:email", async(req, res)=>{
       const email = req.params.email
-      const result = await foodCollections.find({"addedBy.email": email}).toArray()
+      const result = await foodCollections.find({
+        email: email}).toArray()
+      res.send(result)
+    })
+    // get my orders 
+    app.get("/myOrders/:email", async (req, res)=>{
+      const email = req.params.email;
+      const result = await foodPurchaseCollections.find({buyerEmail: email}).toArray();
       res.send(result)
     })
 
