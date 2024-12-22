@@ -24,6 +24,8 @@ async function run() {
   try {
 
     const foodCollections = client.db("foodDB").collection("foods")
+    const foodPurchaseCollections = client.db("foodDB").collection("purchase")
+
     // get all food
     app.get("/allFood", async(req, res)=>{
       const result = await foodCollections.find().toArray()
@@ -50,6 +52,12 @@ async function run() {
       const newFood = req.body;
       const result = await foodCollections.insertOne(newFood)
       console.log(result, newFood)
+      res.send(result)
+    })
+    // food purchase
+    app.post("/foodPurchase", async(req, res)=>{
+      const newPurchase = req.body;
+      const result = await foodPurchaseCollections.insertOne(newPurchase);
       res.send(result)
     })
 
