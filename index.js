@@ -24,6 +24,7 @@ const verifyToken = (req, res, next)=>{
     if(err){
       return res.status(401).send({massage: "Unauthorize access"})
     }
+    req.user = decoded;  
     next()
   })
 
