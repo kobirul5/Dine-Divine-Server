@@ -12,6 +12,8 @@ app.use(cors({
     'http://localhost:5173',
     'https://assignment-11-client-1cccb.web.app',
     'https://assignment-11-client-1cccb.firebaseapp.com',
+    'https://dine-divine-0.web.app',
+    'https://dine-divine-0.firebaseapp.com',
     ],
   credentials: true
 }));
@@ -83,7 +85,7 @@ async function run() {
     })
     // get all food filter
     app.get("/topFood",  async(req, res)=>{
-      const result = await foodCollections.find().sort({purchaseCount: -1}).limit(6).toArray()
+      const result = await foodCollections.find().sort({purchaseCount: -1}).limit(8).toArray()
       res.send(result)
     })
 
